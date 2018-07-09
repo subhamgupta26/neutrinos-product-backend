@@ -5,6 +5,8 @@ var User = require('../models/user');
 
 var Product = require('../models/product');
 
+var _ = require('underscore');
+
 /* GET users listing. */
 
 router.get('/', function(req, res, next) {
@@ -34,10 +36,11 @@ router.put('/:userId/updatecart', function(req, res, next) {
         User.findById(req.params.userId, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
-        console.log(user.products);
-        console.log(req.body._id);
-        if(user.products.includes(req.body._id)){
-          return res.status(400).send("This product is already in cart.");
+        //console.log(user.products);
+        //console.log(req.body._id);
+        //console.log(user.products.indexOf(req.body._id));
+        if(user.products.indexOf(req.body._id)>-1){
+          return res.status(400).send({message:"This product is already in cart."});
         }
         user.products.push(req.body._id);
         User.update(user,function (err, user) {
