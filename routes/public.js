@@ -37,7 +37,7 @@ router.post('/login', function(req, res, next) {
           return res.status(401).send("Username or password incorrect");
         }
 
-        res.status(200).send("Login successful!!");
+        res.status(200).send({message:"Login successful!!"});
     });
 });
 

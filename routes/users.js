@@ -34,6 +34,8 @@ router.put('/:userId/updatecart', function(req, res, next) {
         User.findById(req.params.userId, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
+        console.log(user.products);
+        console.log(req.body._id);
         if(user.products.includes(req.body._id)){
           return res.status(400).send("This product is already in cart.");
         }
@@ -41,7 +43,7 @@ router.put('/:userId/updatecart', function(req, res, next) {
         User.update(user,function (err, user) {
           if (err) return res.status(500).send("There was a problem updating the cart.");
           if (!user) return res.status(404).send("Updation failed");
-          res.status(200).send("Update Successful!!");
+          res.status(200).send({message:"Update Successful!!"});
         });
         
     });
