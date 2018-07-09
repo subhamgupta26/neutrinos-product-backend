@@ -48,7 +48,7 @@ router.put('/:userId/updatecart', function(req, res, next) {
 });
 
 router.get('/:userId/logout', function(req, res, next) {
-
+  console.log("logout");
   res.send('respond with a resource');
 });
 
