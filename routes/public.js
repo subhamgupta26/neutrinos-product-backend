@@ -35,19 +35,19 @@ router.post('/login', function(req, res, next) {
 
         User.findOne({email : req.body.email}, function (err, currentUser ) {
         if (err) {
-          return res.status(500).send("There was a problem finding the user.");
+          return res.status(500).send({message:"There was a problem finding the user."});
         }
         if(!currentUser){
-          return res.status(404).send("User doesnot exist.");
+          return res.status(404).send({message:"User doesnot exist."});
         }
         //console.log(currentUser);
         // if(currentUser.password !== req.body.password ){
         //   return res.status(401).send("Username or password incorrect");
         // }
 
-            var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+            var passwordIsValid = bcrypt.compareSync(req.body.password, currentUser.password);
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-    var token = jwt.sign({ id: user._id }, config.secret, {
+    var token = jwt.sign({ id: currentUser._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
     });
 
