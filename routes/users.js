@@ -11,8 +11,10 @@ var _ = require('underscore');
 
 router.get('/', function(req, res, next) {
   User.find({}, function(err, users) {
-    if (err)
+    if (err){
+      console.log(err);
       return res.status(500).send('There was a problem finding the users.');
+    }
     res.status(200).send(users);
   });
 });
