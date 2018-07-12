@@ -19,7 +19,7 @@ router.post('/signup', function(req, res, next) {
             password : hashedPassword
         }, 
         function (err, user) {
-            if (err) return res.status(500).send("There was a problem adding the information to the database.");
+            if (err) return res.status(500).send({message:"There was a problem adding the information to the database."});
 
              var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
@@ -46,7 +46,7 @@ router.post('/login', function(req, res, next) {
         // }
 
             var passwordIsValid = bcrypt.compareSync(req.body.password, currentUser.password);
-    if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+    if (!passwordIsValid) return res.status(401).send({ auth: false, token: null,message: 'Username and password doesnt match' });
     var token = jwt.sign({ id: currentUser._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
     });

@@ -18,6 +18,8 @@ var app = express();
 var User= require('./models/user');
 var Product= require('./models/product');
 
+var VerifyToken = require('./auth/VerifyToken');
+
 
 
 
@@ -35,8 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/products', products);
+app.use('/users',VerifyToken, users);
+app.use('/products', VerifyToken, products);
 app.use('/public', public);
 
 // catch 404 and forward to error handler
@@ -61,10 +63,44 @@ app.use(function(err, req, res, next) {
 //var awesome_instance = new User({ email: 'admin@gmail.com', password: 'admin', name: 'awesome' });
 
 
-var awesome_instance = new Product({ name: 'Cake', price: '10', imagePath: '/cake.jpg' , productId: 'CAKE10'});
+// var awesome_instance = new Product({ name: 'HTC1', price: '10000', imagePath: 'fileServer/images1.jpg' , productId: 'HTC01'});
+// var awesome_instance1 = new Product({ name: 'HTC2', price: '20000', imagePath: 'fileServer/images2.jpg' , productId: 'HTC02'});
+// var awesome_instance2 = new Product({ name: 'SAMSUNG1', price: '10000', imagePath: 'fileServer/images3.jpg' , productId: 'SAMSUNG01'});
+// var awesome_instance3 = new Product({ name: 'SAMSUNG2', price: '12000', imagePath: 'fileServer/images4.jpg' , productId: 'SAMSUNG02'});
+// var awesome_instance4 = new Product({ name: 'HTC3', price: '16000', imagePath: 'fileServer/images5.jpg' , productId: 'HTC03'});
+// var awesome_instance5 = new Product({ name: 'ONEPLUS1', price: '30000', imagePath: 'fileServer/images6.jpg' , productId: 'ONEPLUS01'});
 
-// Save the new model instance, passing a callback
+
+
+
+
+// //Save the new model instance, passing a callback
 // awesome_instance.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+//   console.log('saved');
+// });
+// awesome_instance1.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+//   console.log('saved');
+// });
+// awesome_instance2.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+//   console.log('saved');
+// });
+// awesome_instance3.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+//   console.log('saved');
+// });
+// awesome_instance4.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+//   console.log('saved');
+// });
+// awesome_instance5.save(function (err) {
 //   if (err) return handleError(err);
 //   // saved!
 //   console.log('saved');
