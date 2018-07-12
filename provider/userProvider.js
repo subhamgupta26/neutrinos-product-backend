@@ -20,7 +20,7 @@ userProvider = function () {
     };
 
     this.getUserByEmail = function (email, callback) {
-        User.findOne({ email: email }, function (err, currentUser) {
+        User.findOne({ email: email }, function (err, user) {
             callback(err, user);
         });
     }

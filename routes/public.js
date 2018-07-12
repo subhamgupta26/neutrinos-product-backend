@@ -17,7 +17,8 @@ router.post('/signup', function (req, res, next) {
     if(user){
       return res.status(400).send({ message: "Email already exist." });
     }
-  })
+    else{
+  
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   // User.create({
@@ -42,6 +43,8 @@ router.post('/signup', function (req, res, next) {
         expiresIn: 86400 // expires in 24 hours
       });
       res.status(200).send({ auth: true, token: token });    
+  });
+    }
   });
 });
 
