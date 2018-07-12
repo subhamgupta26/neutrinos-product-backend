@@ -7,17 +7,34 @@ userProvider = function () {
         });
     };
 
-    this.getUserById = function (userId,callback) {
-        User.findById(userId, function(err, user){
-            callback(err,user);
+    this.getUserById = function (userId, callback) {
+        User.findById(userId, function (err, user) {
+            callback(err, user);
         });
     };
 
-    this.updateUser = function (userId,user,callback) {
-        User.update({ _id: userId }, user, function(err, user) {
-            callback(err,user);
+    this.updateUser = function (userId, user, callback) {
+        User.update({ _id: userId }, user, function (err, user) {
+            callback(err, user);
         });
     };
+
+    this.getUserByEmail = function (email, callback) {
+        User.findOne({ email: email }, function (err, currentUser) {
+            callback(err, user);
+        });
+    }
+
+    this.createUser = function (email, userName, password, callback) {
+        User.create({
+            name: userName,
+            email: email,
+            password: password
+        },
+            function (err, user) {
+                callback(err, user)
+            });
+    }
 }
 
 exports.userProvider = userProvider;

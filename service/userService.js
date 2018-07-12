@@ -18,6 +18,18 @@ userService = function () {
             callback(err,user);
         });
     };
+
+    this.getUserByEmail = function (email, callback) {
+        userProvider.getUserByEmail(email,function (err, user){
+            callback(err, user);
+        });
+    };
+
+    this.createUser = function (email, userName, password, callback){
+        userProvider.createUser(email, userName, password, function(err, user){
+            callback(err, user);
+        });
+    }
 }
 
 exports.userService = userService;
